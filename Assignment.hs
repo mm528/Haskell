@@ -64,7 +64,7 @@ main = do
 					--Print on the termilan the list of the blaze
 
 
-					h <- print $ renderHtml $ blaze (pisw" ") "My blog" ["Test1","Test2","Test3"]
+					h <- print $ renderHtml $ blaze (getChar1" ") "My blog" ["Test1","Test2","Test3"]
 					--simpleHTTP nullConf $  msum [ dir "Temperatures" $ ok getDetailList
 					--								,dir "Specify" $ ok "hello"
 					--							, seeOther ("/Temperatures"::String) getDetailList]
@@ -254,20 +254,20 @@ blaze3 title k headers body =
 helloBlaze :: ServerPart Response
 helloBlaze =
 	ok $ toResponse $
-	 blaze (pisw" ") "My Temp" ["Michalis","test1","Test2"]	
+	 blaze (getChar1 " ") "My Temp" ["Michalis","test1","Test2"]	
 
 
 getText :: Response
 getText = 
 	toResponse $ 
-				blaze2 (pisw2" ") "My Temp" ["Michalis","bar","fizz"]	
+				blaze2 (getChar2" ") "My Temp" ["Michalis","bar","fizz"]	
 
 
 getText2 :: Response
 getText2 =
 	toResponse $
 				
-	blaze3 (pisw2 " " ) (getTemp getDetailsExample) "My Temp"  ["Michalis","bar","fizz"]	
+	blaze3 (getChar2 " " ) (getTemp getDetailsExample) "My Temp"  ["Michalis","bar","fizz"]	
 
 changeToChar2 :: [Details] -> [Char]
 changeToChar2 [] = []
@@ -285,18 +285,18 @@ changeToChar [] = []
 changeToChar (k:ks)= "Temperature is  : " ++"\n"++ C.unpack(encode k)
 	
 {-
-Geting from the list as character now ad be able to return on the blaze
+Geting from the list as character. now be able to return on the blaze
 -}	
-pisw2 :: [Char] -> [Char]
-pisw2 [] = [] 
-pisw2 l = changeToChar getDetailsExample
+getChar2 :: [Char] -> [Char]
+getChar2 [] = [] 
+getChar2 l = changeToChar getDetailsExample
 {-
 Geting from the list as character now ad be able to return on the blaze in different directory
 -}	
 
-pisw :: [Char]-> [Char]
-pisw [] = []
-pisw k = changeToChar2 getDetailsExample
+getChar1 :: [Char]-> [Char]
+getChar1 [] = []
+getChar1 k = changeToChar2 getDetailsExample
 
 
 --aver:: [Details] -> Int
